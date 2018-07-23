@@ -1,0 +1,252 @@
+[
+	{
+		"Number": 1,
+		"State": "Alabama",
+		"Name": "Montgomery"
+	},
+	{
+		"Number": 2,
+		"State": "Alaska",
+		"Name": "Juneau"
+	},
+	{
+		"Number": 3,
+		"State": "Arizona",
+		"Name": "Phoenix"
+	},
+	{
+		"Number": 4,
+		"State": "Arkansas",
+		"Name": "Little Rock"
+	},
+	{
+		"Number": 5,
+		"State": "California",
+		"Name": "Sacramento"
+	},
+	{
+		"Number": 6,
+		"State": "Colorado",
+		"Name": "Denver"
+	},
+	{
+		"Number": 7,
+		"State": "Connecticut",
+		"Name": "Hartford"
+	},
+	{
+		"Number": 8,
+		"State": "Delaware",
+		"Name": "Dover"
+	},
+	{
+		"Number": 9,
+		"State": "Florida",
+		"Name": "Tallahassee"
+	},
+	{
+		"Number": 10,
+		"State": "Georgia",
+		"Name": "Atlanta"
+	},
+	{
+		"Number": 1,
+		"State": "Hawaii",
+		"Name": "Honolulu"
+	},
+	{
+		"Number": 1,
+		"State": "Idaho",
+		"Name": "Boise City"
+	},
+	{
+		"Number": 1,
+		"State": "Illinois",
+		"Name": "Springfield"
+	},
+	{
+		"Number": 1,
+		"State": "Indiana",
+		"Name": "Indianapolis"
+	},
+	{
+		"Number": 1,
+		"State": "Iowa",
+		"Name": "Des Moines"
+	},
+	{
+		"Number": 1,
+		"State": "Kansas",
+		"Name": "Topeka"
+	},
+	{
+		"Number": 1,
+		"State": "Kentucky",
+		"Name": "Frankfort"
+	},
+	{
+		"Number": 1,
+		"State": "Louisiana",
+		"Name": "Baton Rouge"
+	},
+	{
+		"Number": 1,
+		"State": "Maine",
+		"Name": "Augusta"
+	},
+	{
+		"Number": 1,
+		"State": "Maryland",
+		"Name": "Annapolis"
+	},
+	{
+		"Number": 1,
+		"State": "Massachusetts",
+		"Name": "Boston"
+	},
+	{
+		"Number": 1,
+		"State": "Michigan",
+		"Name": "Lansing"
+	},
+	{
+		"Number": 1,
+		"State": "Minnesota",
+		"Name": "St. Paul"
+	},
+	{
+		"Number": 1,
+		"State": "Mississippi",
+		"Name": "Jackson"
+	},
+	{
+		"Number": 1,
+		"State": "Missouri",
+		"Name": "Jefferson City"
+	},
+	{
+		"Number": 1,
+		"State": "Montana",
+		"Name": "Helena"
+	},
+	{
+		"Number": 1,
+		"State": "Nebraska",
+		"Name": "Lincoln"
+	},
+	{
+		"Number": 1,
+		"State": "Nevada",
+		"Name": "Carson City"
+	},
+	{
+		"Number": 1,
+		"State": "New Hampshire",
+		"Name": "Concord"
+	},
+	{
+		"Number": 1,
+		"State": "New Jersey",
+		"Name": "Trenton"
+	},
+	{
+		"Number": 1,
+		"State": "New Mexico",
+		"Name": "Santa Fe"
+	},
+	{
+		"Number": 1,
+		"State": "New York",
+		"Name": "Albany"
+	},
+	{
+		"Number": 1,
+		"State": "North Carolina",
+		"Name": "Raleigh"
+	},
+	{
+		"Number": 1,
+		"State": "North Dakota",
+		"Name": "Bismarck"
+	},
+	{
+		"Number": 1,
+		"State": "Ohio",
+		"Name": "Columbus"
+	},
+	{
+		"Number": 1,
+		"State": "Oklahoma",
+		"Name": "Oklahoma City"
+	},
+	{
+		"Number": 1,
+		"State": "Oregon",
+		"Name": "Salem"
+	},
+	{
+		"Number": 1,
+		"State": "Pennsylvania",
+		"Name": "Harrisburg"
+	},
+	{
+		"Number": 1,
+		"State": "Rhode Island",
+		"Name": "Providence"
+	},
+	{
+		"Number": 1,
+		"State": "South Carolina",
+		"Name": "Columbia"
+	},
+	{
+		"Number": 1,
+		"State": "South Dakota",
+		"Name": "Pierre"
+	},
+	{
+		"Number": 1,
+		"State": "Tennessee",
+		"Name": "Nashville-Davidson"
+	},
+	{
+		"Number": 1,
+		"State": "Texas",
+		"Name": "Austin"
+	},
+	{
+		"Number": 1,
+		"State": "Utah",
+		"Name": "Salt Lake City"
+	},
+	{
+		"Number": 1,
+		"State": "Vermont",
+		"Name": "Montpelier"
+	},
+	{
+		"Number": 1,
+		"State": "Virginia",
+		"Name": "Richmond"
+	},
+	{
+		"Number": 1,
+		"State": "Washington",
+		"Name": "Olympia"
+	},
+	{
+		"Number": 1,
+		"State": "West Virginia",
+		"Name": "Charleston"
+	},
+	{
+		"Number": 1,
+		"State": "Wisconsin",
+		"Name": "Madison"
+	},
+	{
+		"Number": 1,
+		"State": "Wyoming",
+		"Name": "Cheyenne"
+	}
+]
