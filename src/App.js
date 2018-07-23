@@ -28,7 +28,7 @@ class App extends Component {
 	};
 
 	getStateChoices = () => {
-		const { stateName, cities } = this.state;
+		const { stateName } = this.state;
 		cityData.forEach(state => {
 			if (state.state === stateName) {
 				this.setState({
@@ -36,7 +36,16 @@ class App extends Component {
 				});
 			}
 		});
-	};
+    };
+    
+    nextQuestion = () => {
+        this.setState({
+            question: this.state.question + 1
+        })
+        console.log(this.state.question)
+        this.getStateNameAndAnswer();
+        this.getStateChoices();
+    }
 
 	componentDidMount() {
 		this.getStateChoices();
@@ -60,24 +69,26 @@ class App extends Component {
 					<Question>
 						What is the capital of {this.state.stateName}?
 					</Question>
-					<Choices>
-						{cities ? (
-							cities.map(city => {
-								return (
-									<ul>
-										<li>{city}</li>
-									</ul>
-								);
-							})
-						) : (
-							<div />
-						)}
-					</Choices>
+                    <Cities cities={cities} nextQuestion={this.nextQuestion}/>
+					<Choices />
 					<ProgressTracker />
 				</QuizContainer>
 			</div>
 		);
 	}
 }
+
+const Cities = ({cities, nextQuestion}) =>
+	cities ? (
+		cities.map(city => {
+			return (
+				<ul>
+					<button onClick={nextQuestion}>{city}</button>
+				</ul>
+			);
+		})
+	) : (
+		<div />
+	);
 
 export default App;
