@@ -15,15 +15,17 @@ class App extends Component {
 		question: 1,
 		stateName: '',
 		answer: '',
-		cities: []
+		cities: [],
+		wrongAnswer: ''
 	};
 	getStateNameAndAnswer = () => {
 		stateCapitals.forEach(region => {
-			this.state.question === region['Number'] &&
+			if (this.state.question === region['Number']) {
 				this.setState({
 					stateName: region['State'],
 					answer: region['Name']
 				});
+			}
 		});
 	};
 
@@ -36,30 +38,52 @@ class App extends Component {
 				});
 			}
 		});
-    };
-    
-    nextQuestion = () => {
-        this.setState({
-            question: this.state.question + 1
-        })
-        console.log(this.state.question)
-        this.getStateNameAndAnswer();
-        this.getStateChoices();
-    }
+	};
+
+	nextQuestion = event => {
+		event.target.value === this.state.answer
+			? this.setState(
+					{
+						question: this.state.question + 1,
+						wrongAnswer: "You're right!"
+					},
+					() => {
+						this.getStateChoices();
+						this.getStateNameAndAnswer();
+					}
+			  )
+			: this.setState(
+					{
+						wrongAnswer: "You're wrong."
+					},
+					() => {
+						this.getStateChoices();
+						this.getStateNameAndAnswer();
+					}
+			  );
+	};
 
 	componentDidMount() {
 		this.getStateChoices();
-	}
-
-	componentWillMount() {
 		this.getStateNameAndAnswer();
 	}
 
+	componentWillMount() {
+		this.getStateChoices();
+		this.getStateNameAndAnswer();
+	}
+
+	// componentWillReceiveProps() {
+	// 	if (this.state.question !== this.prevState.question) {
+	// 		this.getStateChoices().then(this.getStateNameAndAnswer());
+	// 	}
+	// }
+
 	render() {
 		const { question, stateName, answer, cities } = this.state;
-		console.log('Answer', answer);
-		console.log('State', stateName);
-		console.log('cities', cities);
+		// console.log('Answer', answer);
+		// console.log('State', stateName);
+		// console.log('cities', cities);
 		return (
 			<div className="App">
 				<Title>
@@ -69,8 +93,8 @@ class App extends Component {
 					<Question>
 						What is the capital of {this.state.stateName}?
 					</Question>
-                    <Cities cities={cities} nextQuestion={this.nextQuestion}/>
-					<Choices />
+					<Cities cities={cities} nextQuestion={this.nextQuestion} />
+					{this.state.wrongAnswer}
 					<ProgressTracker />
 				</QuizContainer>
 			</div>
@@ -78,12 +102,14 @@ class App extends Component {
 	}
 }
 
-const Cities = ({cities, nextQuestion}) =>
+const Cities = ({ cities, nextQuestion }) =>
 	cities ? (
 		cities.map(city => {
 			return (
-				<ul>
-					<button onClick={nextQuestion}>{city}</button>
+				<ul key={city}>
+					<button value={city} onClick={nextQuestion}>
+						{city}
+					</button>
 				</ul>
 			);
 		})
