@@ -14,8 +14,8 @@ class App extends Component {
 	state = {
 		question: 1,
 		stateName: '',
-        answer: '',
-        cities: []
+		answer: '',
+		cities: []
 	};
 	getStateNameAndAnswer = () => {
 		stateCapitals.forEach(region => {
@@ -28,34 +28,29 @@ class App extends Component {
 	};
 
 	getStateChoices = () => {
+		const { stateName, cities } = this.state;
 		cityData.forEach(state => {
-            this.state.stateName === state['state'] &&
-                console.log('state', state.cities)
-                this.setState({
-                    cities: state.cities
-                })
-				// state['cities'].forEach(city => <p>{city}</p>);
+			if (state.state === stateName) {
+				this.setState({
+					cities: state.cities
+				});
+			}
 		});
 	};
 
 	componentDidMount() {
-        this.getStateNameAndAnswer();
-        this.getStateChoices()
-    }
-    
-    renderCities = () => {
-        
-        this.state.cities.map((city) => {
-            <ul>
-                <li>{city}</li>
-            </ul>
-        })
-    }
+		this.getStateChoices();
+	}
+
+	componentWillMount() {
+		this.getStateNameAndAnswer();
+	}
 
 	render() {
-		const { question, stateName, answer } = this.state;
-        console.log('Answer', answer);
-        console.log('city', this.state.cities)
+		const { question, stateName, answer, cities } = this.state;
+		console.log('Answer', answer);
+		console.log('State', stateName);
+		console.log('cities', cities);
 		return (
 			<div className="App">
 				<Title>
@@ -65,11 +60,19 @@ class App extends Component {
 					<Question>
 						What is the capital of {this.state.stateName}?
 					</Question>
-                    <Choices>
-                        {this.state.cities.map((city)=> {
-                            return <div>{city}</div>
-                        })}
-                    </Choices>
+					<Choices>
+						{cities ? (
+							cities.map(city => {
+								return (
+									<ul>
+										<li>{city}</li>
+									</ul>
+								);
+							})
+						) : (
+							<div />
+						)}
+					</Choices>
 					<ProgressTracker />
 				</QuizContainer>
 			</div>
