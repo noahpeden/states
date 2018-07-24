@@ -9,13 +9,14 @@ import {
 } from './Styles';
 import cityData from './data/cities.json';
 import stateCapitals from './data/state-capitals.json';
+import { setTimeout } from 'core-js';
 
 class App extends Component {
 	state = {
 		question: 1,
 		stateName: '',
 		answer: '',
-		cities: [],
+		cities: '',
 		wrongAnswer: ''
 	};
 	getStateNameAndAnswer = () => {
@@ -33,6 +34,7 @@ class App extends Component {
 		const { stateName } = this.state;
 		cityData.forEach(state => {
 			if (state.state === stateName) {
+				console.log(state.state);
 				this.setState({
 					cities: state.cities
 				});
@@ -48,8 +50,10 @@ class App extends Component {
 						wrongAnswer: "You're right!"
 					},
 					() => {
-						this.getStateChoices();
-						this.getStateNameAndAnswer();
+						setTimeout(() => {
+							this.getStateNameAndAnswer();
+							this.getStateChoices();
+						}, 100);
 					}
 			  )
 			: this.setState(
@@ -65,19 +69,11 @@ class App extends Component {
 
 	componentDidMount() {
 		this.getStateChoices();
-		this.getStateNameAndAnswer();
 	}
 
 	componentWillMount() {
-		this.getStateChoices();
 		this.getStateNameAndAnswer();
 	}
-
-	// componentWillReceiveProps() {
-	// 	if (this.state.question !== this.prevState.question) {
-	// 		this.getStateChoices().then(this.getStateNameAndAnswer());
-	// 	}
-	// }
 
 	render() {
 		const { question, stateName, answer, cities } = this.state;
