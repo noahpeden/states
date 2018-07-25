@@ -3,9 +3,8 @@ import {
 	Title,
 	QuizContainer,
 	Question,
-	Choices,
 	Image,
-	ProgressTracker
+	CitiesContainer
 } from './Styles';
 import cityData from './data/cities.json';
 import stateCapitals from './data/state-capitals.json';
@@ -17,7 +16,10 @@ class App extends Component {
 		stateName: '',
 		answer: '',
 		cities: '',
-		wrongAnswer: ''
+		questionResponse: '',
+		correct: 0,
+		wrong: 0,
+		percentage: 0
 	};
 	getStateNameAndAnswer = () => {
 		stateCapitals.forEach(region => {
@@ -34,7 +36,6 @@ class App extends Component {
 		const { stateName } = this.state;
 		cityData.forEach(state => {
 			if (state.state === stateName) {
-				console.log(state.state);
 				this.setState({
 					cities: state.cities
 				});
@@ -47,18 +48,21 @@ class App extends Component {
 			? this.setState(
 					{
 						question: this.state.question + 1,
-						wrongAnswer: "You're right!"
+						questionResponse: "You're right!",
+						correct: this.state.correct + 1,
+						percentage: this.state.percentage + 2
 					},
 					() => {
 						setTimeout(() => {
 							this.getStateNameAndAnswer();
 							this.getStateChoices();
-						}, 100);
+						}, 50);
 					}
 			  )
 			: this.setState(
 					{
-						wrongAnswer: "You're wrong."
+						questionResponse: "You're wrong.",
+						wrong: this.state.wrong + 1
 					},
 					() => {
 						this.getStateChoices();
@@ -76,10 +80,10 @@ class App extends Component {
 	}
 
 	render() {
-		const { question, stateName, answer, cities } = this.state;
-		// console.log('Answer', answer);
-		// console.log('State', stateName);
-		// console.log('cities', cities);
+		const { stateName, answer, cities } = this.state;
+		console.log('Answer', answer);
+		console.log('State', stateName);
+		console.log('cities', cities);
 		return (
 			<div className="App">
 				<Title>
@@ -89,9 +93,20 @@ class App extends Component {
 					<Question>
 						What is the capital of {this.state.stateName}?
 					</Question>
-					<Cities cities={cities} nextQuestion={this.nextQuestion} />
-					{this.state.wrongAnswer}
-					<ProgressTracker />
+					<Image src="https://source.unsplash.com/random/450x350 " />
+					<h3>{this.state.questionResponse}</h3>
+					<div>
+						<h3>Correct:{this.state.correct}</h3>
+						<h3>Incorrect:{this.state.wrong}</h3>
+					</div>
+					<CitiesContainer>
+						<Cities
+							cities={cities}
+							nextQuestion={this.nextQuestion}
+						/>
+					</CitiesContainer>
+					<h3>Your Progress</h3>
+					<ProgressBar percentage={this.state.percentage} />
 				</QuizContainer>
 			</div>
 		);
@@ -102,15 +117,26 @@ const Cities = ({ cities, nextQuestion }) =>
 	cities ? (
 		cities.map(city => {
 			return (
-				<ul key={city}>
-					<button value={city} onClick={nextQuestion}>
-						{city}
-					</button>
-				</ul>
+				<button value={city} key={city} onClick={nextQuestion}>
+					{city}
+				</button>
 			);
 		})
 	) : (
 		<div />
 	);
+
+const ProgressBar = props => {
+	return (
+		<div className="progress-bar">
+			<Filler percentage={props.percentage} />
+			<h3>{props.percentage}%</h3>
+		</div>
+	);
+};
+
+const Filler = props => {
+	return <div style={{ width: `${props.percentage}%` }} className="filler" />;
+};
 
 export default App;
