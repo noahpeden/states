@@ -251,15 +251,15 @@
 	{
 		"state": "Hawaii",
 		"cities": [
-            "Honolulu",
-            "Kailua",
-            "Hilo",
-            "Lahaina",
-            "Kapolei",
-            "Waikoloa Village",
-            "Hawi",
-            "Kahului"
-        ]
+			"Honolulu",
+			"Kailua",
+			"Hilo",
+			"Lahaina",
+			"Kapolei",
+			"Waikoloa Village",
+			"Hawi",
+			"Kahului"
+		]
 	},
 	{
 		"state": "Idaho",
@@ -316,8 +316,8 @@
 			"Evansville",
 			"South Bend",
 			"Carmel",
-            "Fishers",
-            "Indianapolis",
+			"Fishers",
+			"Indianapolis",
 			"Bloomington",
 			"Hammond",
 			"Gary",
@@ -338,7 +338,7 @@
 	{
 		"state": "Iowa",
 		"cities": [
-            "Cedar Rapids",
+			"Cedar Rapids",
 			"Davenport",
 			"Des Moines",
 			"Sioux City",
@@ -531,7 +531,7 @@
 	{
 		"state": "Minnesota",
 		"cities": [
-            "Rochester",
+			"Rochester",
 			"Minneapolis",
 			"Duluth",
 			"Eden Prairie",
@@ -554,7 +554,7 @@
 	{
 		"state": "Mississippi",
 		"cities": [
-            "Gulfport",
+			"Gulfport",
 			"Southaven",
 			"Hattiesburg",
 			"Jackson",
@@ -814,7 +814,7 @@
 	{
 		"state": "Ohio",
 		"cities": [
-            "Cleveland",
+			"Cleveland",
 			"Cincinnati",
 			"Toledo",
 			"Columbus",
@@ -835,7 +835,7 @@
 	{
 		"state": "Oklahoma",
 		"cities": [
-            "Tulsa",
+			"Tulsa",
 			"Norman",
 			"Broken Arrow",
 			"Lawton",
@@ -963,6 +963,7 @@
 		"cities": [
 			"Memphis",
 			"Knoxville",
+			"Nashville",
 			"Chattanooga",
 			"Clarksville",
 			"Murfreesboro",
@@ -1075,8 +1076,8 @@
 		"cities": [
 			"Seattle",
 			"Spokane",
-            "Tacoma",
-            "Olympia",
+			"Tacoma",
+			"Olympia",
 			"Vancouver",
 			"Bellevue",
 			"Kent",
@@ -1099,7 +1100,7 @@
 	{
 		"state": "West Virginia",
 		"cities": [
-            "Huntington",
+			"Huntington",
 			"Morgantown",
 			"Parkersburg",
 			"Charleston",
