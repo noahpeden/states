@@ -6,9 +6,7 @@ import {
 	Image,
 	CitiesContainer
 } from './Styles';
-import Cities from './Quiz/Choices';
-import ProgressBar from './Quiz/ProgressBar';
-import stateNames from './Quiz/methods';
+import { Cities, ProgressBar, Response, stateNames } from './Quiz';
 
 const states = stateNames();
 
@@ -40,7 +38,6 @@ class App extends Component {
 	};
 
 	questionResponse = response => {
-		console.log('boom');
 		this.setState(
 			{
 				question: this.state.question + 1,
@@ -90,11 +87,11 @@ class App extends Component {
 							What is the capital of {this.state.stateName}?
 						</Question>
 						<Image src="https://source.unsplash.com/random/450x350 " />
-						<h3>{this.state.questionResponse}</h3>
-						<div>
-							<h3>Correct:{correct}</h3>
-							<h3>Incorrect:{wrong}</h3>
-						</div>
+						<Response
+							questionResponse={this.questionResponse}
+							correct={correct}
+							wrong={wrong}
+						/>
 						<CitiesContainer>
 							<Cities
 								stateName={stateName}
@@ -102,7 +99,6 @@ class App extends Component {
 								nextQuestion={this.nextQuestion}
 							/>
 						</CitiesContainer>
-						<h3>Your Progress</h3>
 						<ProgressBar percentage={percentage} />
 					</QuizContainer>
 				)}
