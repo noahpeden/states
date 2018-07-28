@@ -6,31 +6,33 @@ import {
 	Image,
 	CitiesContainer
 } from './Styles';
-import cityData from './data/cities.json';
-import stateCapitals from './data/state-capitals.json';
-import { setTimeout } from 'core-js';
+import Cities from './Quiz/Choices';
+import ProgressBar from './Quiz/ProgressBar';
+import stateNames from './Quiz/methods';
 
 class App extends Component {
-	constructor(props) {
-		super(props);
-		this.shuffleArray(stateCapitals);
-	}
+	initialState = {
+		stateArray: stateNames()
+	};
+
 	state = {
 		question: 0,
 		stateName: '',
 		answer: '',
-		cities: '',
 		questionResponse: '',
 		correct: 0,
 		wrong: 0,
 		percentage: 0,
-		newStateArray: []
+		newStateArray: this.initialState.stateArray
 	};
+
+	componentWillMount() {
+		console.log(this.state.newStateArray);
+		this.getStateNameAndAnswer();
+	}
 
 	getStateNameAndAnswer = () => {
 		const { newStateArray, question } = this.state;
-		console.log(newStateArray);
-
 		newStateArray.forEach(region => {
 			if (question === region['Number']) {
 				this.setState({
@@ -41,96 +43,34 @@ class App extends Component {
 		});
 	};
 
-	getStateChoices = () => {
-		const { stateName } = this.state;
-
-		cityData.forEach(state => {
-			if (state.state === stateName) {
-				this.setState({
-					cities: state.cities
-				});
-			}
-		});
-	};
-
-	updateCounter = () => {
+	questionResponse = response => {
 		this.setState({
-			counter: this.state.counter + 1
+			question: this.state.question + 1,
+			questionResponse: response,
+			percentage: this.state.percentage + 2
 		});
+		this.getStateNameAndAnswer();
+		response === 'You are correct'
+			? this.setState({
+					correct: this.state.correct + 1
+			  })
+			: this.setState({
+					wrong: this.state.wrong + 1
+			  });
 	};
 
 	nextQuestion = event => {
 		event.target.value === this.state.answer
-			? this.setState(
-					{
-						question: this.state.question + 1,
-						questionResponse: "You're right!",
-						correct: this.state.correct + 1,
-						percentage: this.state.percentage + 2
-					},
-					() => {
-						setTimeout(() => {
-							this.getStateNameAndAnswer();
-							this.getStateChoices();
-						}, 50);
-					}
-			  )
-			: this.setState(
-					{
-						question: this.state.question + 1,
-						questionResponse: "You're wrong.",
-						wrong: this.state.wrong + 1,
-						percentage: this.state.percentage + 2
-					},
-					() => {
-						setTimeout(() => {
-							this.getStateNameAndAnswer();
-							this.getStateChoices();
-						}, 50);
-					}
-			  );
+			? this.questionResponse('You are correct')
+			: this.questionResponse('You are incorrect');
 	};
 
-	shuffleArray = array => {
-		for (let i = array.length - 1; i > 0; i--) {
-			const j = Math.floor(Math.random() * (i + 1));
-			[array[i], array[j]] = [array[j], array[i]]; // eslint-disable-line no-param-reassign
-		}
-
-		array.forEach((state, i) => {
-			state.Number = i;
-		});
-		this.setState({
-			newStateArray: array.forEach(element => {
-				this.state.newStateArray.push(element);
-			})
-		});
+	restartGame = () => {
+		window.location.reload(true);
 	};
-
-	componentDidMount() {
-		this.getStateChoices();
-		console.log(stateCapitals.length);
-	}
-	componentWillMount() {
-		this.getStateNameAndAnswer();
-	}
-
-    restartGame = () => {
-        window.location.reload(true)
-    }
 
 	render() {
-		const {
-			stateName,
-			answer,
-			cities,
-			percentage,
-			correct,
-			wrong
-		} = this.state;
-		console.log('Answer', answer);
-		console.log('State', stateName);
-		console.log('cities', cities);
+		const { stateName, cities, percentage, correct, wrong } = this.state;
 		return (
 			<div className="App">
 				<Title>
@@ -140,7 +80,9 @@ class App extends Component {
 					<div>
 						<h1>The Quiz is complete.</h1>
 						Your score is {correct} / 50
-                        <button onClick={this.restartGame}>Restart the Quiz</button>
+						<button onClick={this.restartGame}>
+							Restart the Quiz
+						</button>
 					</div>
 				) : (
 					<QuizContainer>
@@ -155,6 +97,7 @@ class App extends Component {
 						</div>
 						<CitiesContainer>
 							<Cities
+								stateName={stateName}
 								cities={cities}
 								nextQuestion={this.nextQuestion}
 							/>
@@ -167,33 +110,5 @@ class App extends Component {
 		);
 	}
 }
-
-const Cities = ({ cities, nextQuestion }) =>
-	cities ? (
-		cities.map((city, i) => {
-			if (i <= 7) {
-				return (
-					<button value={city} key={city} onClick={nextQuestion}>
-						{city}
-					</button>
-				);
-			}
-		})
-	) : (
-		<div />
-	);
-
-const ProgressBar = props => {
-	return (
-		<div className="progress-bar">
-			<Filler percentage={props.percentage} />
-			<h3>{props.percentage}%</h3>
-		</div>
-	);
-};
-
-const Filler = props => {
-	return <div style={{ width: `${props.percentage}%` }} className="filler" />;
-};
 
 export default App;
