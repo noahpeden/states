@@ -10,11 +10,9 @@ import Cities from './Quiz/Choices';
 import ProgressBar from './Quiz/ProgressBar';
 import stateNames from './Quiz/methods';
 
-class App extends Component {
-	initialState = {
-		stateArray: stateNames()
-	};
+const states = stateNames();
 
+class App extends Component {
 	state = {
 		question: 0,
 		stateName: '',
@@ -26,14 +24,12 @@ class App extends Component {
 	};
 
 	componentWillMount() {
-		console.log(this.state.newStateArray);
 		this.getStateNameAndAnswer();
 	}
 
 	getStateNameAndAnswer = () => {
 		const { question } = this.state;
-		const { stateArray } = this.initialState;
-		stateArray.forEach(region => {
+		states.forEach(region => {
 			if (question === region['Number']) {
 				this.setState({
 					stateName: region['State'],
@@ -44,12 +40,16 @@ class App extends Component {
 	};
 
 	questionResponse = response => {
-		this.setState({
-			question: this.state.question + 1,
-			questionResponse: response,
-			percentage: this.state.percentage + 2
-		});
-		this.getStateNameAndAnswer();
+		console.log('boom');
+		this.setState(
+			{
+				question: this.state.question + 1,
+				questionResponse: response,
+				percentage: this.state.percentage + 2
+			},
+			() => this.getStateNameAndAnswer()
+		);
+
 		response === 'You are correct'
 			? this.setState({
 					correct: this.state.correct + 1
