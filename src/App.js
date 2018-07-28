@@ -22,8 +22,7 @@ class App extends Component {
 		questionResponse: '',
 		correct: 0,
 		wrong: 0,
-		percentage: 0,
-		newStateArray: this.initialState.stateArray
+		percentage: 0
 	};
 
 	componentWillMount() {
@@ -32,8 +31,9 @@ class App extends Component {
 	}
 
 	getStateNameAndAnswer = () => {
-		const { newStateArray, question } = this.state;
-		newStateArray.forEach(region => {
+		const { question } = this.state;
+		const { stateArray } = this.initialState;
+		stateArray.forEach(region => {
 			if (question === region['Number']) {
 				this.setState({
 					stateName: region['State'],
