@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { Title, QuizContainer, Question, Image, CitiesContainer } from './Styles';
-import { Cities, ProgressBar, Response, stateNames } from './Quiz';
+import Cities from './Quiz/Choices';
+import ProgressBar from './Quiz/ProgressBar';
+import stateNames from './Quiz/methods';
+import Response from './Quiz/Response';
 
 const states = stateNames();
 
 class App extends Component {
     state = {
-        question: 0,
+        question: states[0].Name,
+        counter: 1,
         stateName: '',
         answer: '',
         questionResponse: '',
@@ -22,7 +26,7 @@ class App extends Component {
     getStateNameAndAnswer = () => {
         const { question } = this.state;
         states.forEach(region => {
-            if (question === region['Number']) {
+            if (question === region.Name) {
                 this.setState({
                     stateName: region['State'],
                     answer: region['Name']
@@ -32,22 +36,27 @@ class App extends Component {
     };
 
     questionResponse = response => {
-        this.setState(
-            {
-                question: this.state.question + 1,
-                questionResponse: response,
-                percentage: this.state.percentage + 2
-            },
-            () => this.getStateNameAndAnswer()
-        );
+        this.setState({
+            counter: this.state.counter + 1,
+            questionResponse: response,
+            percentage: this.state.percentage + 2
+        });
 
         response === 'You are correct'
-            ? this.setState({
-                  correct: this.state.correct + 1
-              })
-            : this.setState({
-                  wrong: this.state.wrong + 1
-              });
+            ? this.setState(
+                  {
+                      question: states[this.state.counter].Name,
+                      correct: this.state.correct + 1
+                  },
+                  () => this.getStateNameAndAnswer()
+              )
+            : this.setState(
+                {
+                    question: states[this.state.counter].Name,
+                    wrong: this.state.wrong + 1
+                },
+                () => this.getStateNameAndAnswer()
+            )
     };
 
     nextQuestion = event => {
